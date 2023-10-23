@@ -9,16 +9,13 @@ import styles from "./styles";
 
 const Home = () => {
   const { logout, user } = useContext(AuthContext);
-//   const idUsers = AsyncStorage.getItem("idUsers");
-//   const idUsers = parseInt(storedIdUsers, 10);
-
+  const idUsers = AsyncStorage.getItem("idUsers");
   const [userSkills, setUserSkills] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const token = AsyncStorage.getItem("token");
   const login = user.login;
   const [openModal, setOpenModal] = useState(false);
   const storedIdUsers = AsyncStorage.getItem("idUsers");
-        const idUsers = parseInt(storedIdUsers);
 
   const navigation = useNavigation();
 
@@ -35,8 +32,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUserSkills = async () => {
       try {
-        const storedIdLong = await AsyncStorage.getItem("idLong");
-const idUsers = storedIdLong ? parseInt(storedIdLong, 10) : null;
+        
         const response = await api.get(`/users/user-skills/${idUsers}`, config);
         setUserSkills(response.data);
       } catch (error) {
